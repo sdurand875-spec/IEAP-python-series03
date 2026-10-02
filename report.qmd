@@ -1,0 +1,35 @@
+---
+title: "IEAP – Python Series 03: Group assignment"
+author: "Sarah DURAND · Zoé SAUGE · Shunan YIN"
+format:
+  pdf:
+    fontsize: 10pt
+    geometry: margin=1.5cm
+---
+
+**GitHub repository:** <https://github.com/sdurand875-spec/IEAP-python-series03>
+
+## 1. Division of tasks
+
+The work was divided according to the parts of the assignment, with one notebook per member in the `Section/` folder:
+
+- **Sarah**: Part 2, functions to find and plot remarkable points (zero crossings, local extrema, unit tests).
+- **Zoé**: Part 3, analysis of a known signal and frequency computation.
+- **Shunan**: Part 4, analysis of a noisy signal and low-pass filtering.
+
+Since parts 3 and 4 depend on part 2, we agreed **at the start** on the names, inputs and outputs of the shared functions (`find_zero_crossings`, `find_local_extrema`, `display_signal_and_remarkable_points`…). This allowed the three parts to be written in parallel. A main notebook (`IEAP-python-series03.ipynb`) gathers the three parts.
+
+## 2. Use of branches and pull requests
+
+- Each member worked on **their own branch** (`part2-functions`, `part3-CleanSignal`, `part-noisysignal`) and only edited **their own notebook**, so no merge conflicts could occur.
+- Small, frequent commits with explicit messages make each member's contribution visible in the history.
+- When a part was finished, a **pull request** was opened to `main` before being merged. Organisational changes (README, this report) also went through a branch and a pull request.
+- After each merge, the other members updated their branch from `main` to get the latest shared functions.
+
+## 3. The three most critical points
+
+1. **Working in parallel on dependent code.** Parts 3 and 4 need the functions of part 2. *Solution:* we fixed the function names and outputs before coding, and parts 3 and 4 load part 2 with `%run part2_functions.ipynb`, so no code is copied between notebooks.
+
+2. **Avoiding merge conflicts with notebooks.** A `.ipynb` file contains code, outputs and metadata, so Git conflicts are very hard to resolve. *Solution:* one notebook per member in `Section/`, one branch per member, and a main notebook to gather everything at the end.
+
+3. **[TO DO with Zoé and Shunan]**
