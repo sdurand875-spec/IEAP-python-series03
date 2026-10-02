@@ -17,19 +17,19 @@ The work was divided according to the parts of the assignment, with one notebook
 - **Zoé**: Part 3, analysis of a known signal and frequency computation.
 - **Shunan**: Part 4, analysis of a noisy signal and low-pass filtering.
 
-Since parts 3 and 4 depend on part 2, we agreed **at the start** on the names, inputs and outputs of the shared functions (`find_zero_crossings`, `find_local_extrema`, `display_signal_and_remarkable_points`…). This allowed the three parts to be written in parallel. A main notebook (`IEAP-python-series03.ipynb`) gathers the three parts.
+Since parts 3 and 4 depend on part 2, we agreed **at the start** on the names, inputs and outputs of the shared functions (`find_zero_crossings`, `find_local_extrema`, `display_signal_and_remarkable_points`, `compute_frequency_from_zero_crossings`…). This allowed the three parts to be written in parallel. At the end, the three notebooks were gathered in the main notebook `IEAP-python-series03.ipynb`.
 
 ## 2. Use of branches and pull requests
 
-- Each member worked on **their own branch** (`part2-functions`, `part3-CleanSignal`, `part-noisysignal`) and only edited **their own notebook**, so no merge conflicts could occur.
-- Small, frequent commits with explicit messages make each member's contribution visible in the history.
-- When a part was finished, a **pull request** was opened to `main` before being merged. Organisational changes (README, this report) also went through a branch and a pull request.
-- After each merge, the other members updated their branch from `main` to get the latest shared functions.
+- Each member worked on **their own branch** (`part2-functions`, `part3-CleanSignal`, `part-noisysignal`) and only edited **their own notebook**, so no merge conflicts could occur. The README, this report and the main notebook also had their own branch.
+- Small, frequent commits with explicit messages (e.g. *"Add local extrema functions and tests (2.3)"*) make each member's contribution visible in the history.
+- Every part was merged into `main` through a **pull request**. Pull requests were **reviewed** by another member: when the results did not match the assignment, we used **"Request changes"** with the exact corrections, and merged only after approval.
+- After each merge, the other members used **"Update from main"** to get the latest shared functions in their branch.
 
 ## 3. The three most critical points
 
-1. **Working in parallel on dependent code.** Parts 3 and 4 need the functions of part 2. *Solution:* we fixed the function names and outputs before coding, and parts 3 and 4 load part 2 with `%run part2_functions.ipynb`, so no code is copied between notebooks.
+1. **Working in parallel on dependent code.** Parts 3 and 4 need the functions of part 2, and part 4 also needs the signal of part 3. *Solution:* the function names and outputs were fixed before coding, and parts 3 and 4 load the previous parts with `%run part2_functions.ipynb` / `%run part3_clean_signal.ipynb`, so no code is copied between notebooks.
 
-2. **Avoiding merge conflicts with notebooks.** A `.ipynb` file contains code, outputs and metadata, so Git conflicts are very hard to resolve. *Solution:* one notebook per member in `Section/`, one branch per member, and a main notebook to gather everything at the end.
+2. **Avoiding merge conflicts with notebooks.** A `.ipynb` file contains code, outputs and metadata, so Git conflicts are very hard to resolve. *Solution:* one notebook per member in `Section/`, one branch per member, and a main notebook gathering everything once all parts were merged.
 
-3. **[TO DO with Zoé and Shunan]**
+3. **Getting results consistent with the assignment.** The first versions of parts 3 and 4 did not use the homework signal (2.06 Hz found instead of 1 Hz), and part 4 did not reuse the shared functions. *Solution:* we compared our outputs with the expected values of the assignment and found the exact signal `s = sin(2π·2t) + 2·sin(2π·t + 1)` (peak-to-peak amplitude 4.822, as in the assignment). The corrections were requested in the pull request reviews; part 3 was corrected by Zoé, and part 4 was corrected with Sarah's help. With uniform white noise (20 % of the peak-to-peak amplitude), the noisy signal gives false zero crossings (≈ 3 Hz), and the Butterworth low-pass filter at 5 Hz (`butter` + `filtfilt`) brings the frequency back to **1.0 Hz**.
